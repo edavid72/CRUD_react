@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Task = ({ task, handletaskDelete }) => {
   return (
@@ -19,11 +20,19 @@ const Task = ({ task, handletaskDelete }) => {
         Description:<span>{task.description}</span>
       </p>
 
-      <button className="button_delete" onClick={()=>handletaskDelete(task.id)}>
+      <button
+        className="button_delete"
+        onClick={() => handletaskDelete(task.id)}
+      >
         Delete
       </button>
     </div>
   );
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  handletaskDelete: PropTypes.func.isRequired,
 };
 
 export default Task;

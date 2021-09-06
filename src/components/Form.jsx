@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 const Form = ({ createTask }) => {
   /*----- State01 of Tast List: Read content that the user types in the form and add to the state -----*/
@@ -106,6 +107,10 @@ const Form = ({ createTask }) => {
       </div>
     </>
   );
+};
+
+Form.propTypes = {
+  createTask: PropTypes.func.isRequired,
 };
 
 export default Form;

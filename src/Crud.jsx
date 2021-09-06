@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/resets.css';
 import './styles/grid.css';
 import Form from './components/Form';
 import Task from './components/Task';
 
 const Crud = () => {
-  //todo: State-->//
-  const [tasksArray, setTasksArray] = useState([]);
+  //Todo: Add Tasks to LocalStorage
+  let initialTasks = JSON.parse(localStorage.getItem('tasksArray'));
+  if (!initialTasks) {
+    initialTasks = [];
+  }
+
+  //Todo: UseState-->//
+  const [tasksArray, setTasksArray] = useState(initialTasks);
+
+  //Todo: UseEffect-->//
+  useEffect(() => {
+    if (initialTasks) {
+      localStorage.setItem('tasksArray', JSON.stringify(tasksArray));
+    } else localStorage.setItem('tasksArray', JSON.stringify([]));
+  }, [tasksArray, initialTasks]);
 
   //*Conditional Message
   const subTitle = tasksArray.length === 0 ? 'Create a Task' : 'Manage Tasks';
 
   //?Function: to take current tasks and add new tasks
   const createTask = (task) => {
-    console.log('Esta es la nueva cita', task);
+    /* console.log('Esta es la nueva cita', task); */
     setTasksArray([...tasksArray, task]);
   };
 
